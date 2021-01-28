@@ -1,13 +1,21 @@
+// Pulls the inputs from html file
 const place = document.querySelector("#place");
 const subBtn = document.querySelector("#subBtn");
 
+// Uses London as a placeholder value
+place.value = "London";
+
+// Calls function
+weatherAPI();
+
+// Event to change location (could be 'onclick' in html)
 subBtn.addEventListener('click', weatherAPI);
 
 
 async function weatherAPI() {
   const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${place.value}&units=imperial&APPID=a649f8f0f6c898c4fe7ae2dfea5f0800`);
   const weaData = await response.json();
-  return console.log({ 
+  return weather = { 
     temp: weaData.main.temp, 
     feels: weaData.main.feels_like,
     humid: weaData.main.humidity,
@@ -27,13 +35,15 @@ async function weatherAPI() {
     visible: weaData.visibility,
     city: weaData.name,
     tmz: weaData.timezone
-    });
+    };
 };
 
 
-
-
 /*
+
+Figure out how to export the object from the function
+
+
 OpenWeather API
 
 a649f8f0f6c898c4fe7ae2dfea5f0800
