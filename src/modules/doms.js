@@ -10,20 +10,29 @@ const body = document.querySelector("body");
 
 //location display
 const location = document.createElement("div");
+  location.setAttribute("class", "location");
   body.appendChild(location);
+
 const city = document.createElement("div");
-const country = document.createElement("div");
-const tmz = document.createElement("div");
+  city.setAttribute("id", "city");
   location.appendChild(city);
+const country = document.createElement("img");
+  country.setAttribute("id", "country");
   location.appendChild(country);
+const tmz = document.createElement("div");
+  tmz.setAttribute("id", "tmz");
   location.appendChild(tmz);
 
 //temp display
 const tempDisplay = document.createElement("div");
-  tempDisplay.setAttribute('class', 'temperature')
+  tempDisplay.setAttribute('class', 'temperature');
   body.appendChild(tempDisplay);
 const feelsLike = document.createElement("div");
   body.appendChild(feelsLike);
+const tMin = document.createElement("div");
+  body.appendChild(tMin);
+const tMax = document.createElement("div");
+  body.appendChild(tMax);
 
 
 
@@ -35,12 +44,14 @@ async function run(p, t) {
 
     //location
     city.textContent = weatherData.name;
-    country.textContent = weatherData.sys.country;
+    country.src = `https://www.countryflags.io/${weatherData.sys.country}/shiny/64.png`;
     tmz.textContent = weatherData.timezone;
 
     //temp
     tempDisplay.textContent = `${weatherData.main.temp}°`;
     feelsLike.textContent = `${weatherData.main.feels_like}°`;
+    tMin.textContent = `${weatherData.main.temp_min}°`;
+    tMax.textContent = `${weatherData.main.temp_max}°`;
     
 
   } catch(e) {
@@ -54,8 +65,8 @@ async function run(p, t) {
       + feels: weaData.main.feels_like,
       humid: weaData.main.humidity,
       press: weaData.main.pressure,
-      tMin: weaData.main.temp_min,
-      tMax: weaData.main.temp_max,
+      + tMin: weaData.main.temp_min,
+      + tMax: weaData.main.temp_max,
       + country: weaData.sys.country,
       sunrise: weaData.sys.sunrise,
       sunset: weaData.sys.sunset,
