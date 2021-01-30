@@ -71,15 +71,9 @@ input[type="text"]:focus { outline: none; }
   border: 2px outset var(--gray);
   cursor: pointer;
 }
-.tempUnits div:hover {
-  background: var(--grayO);
-}
-#cBtn {
-  margin-left: 10px;
-}
-.btnSelect {
-  border: 2px inset var(--gray) !important;
-}
+.tempUnits div:hover { background: var(--grayO); }
+#cBtn { margin-left: 10px; }
+.btnSelect { border: 2px inset var(--gray) !important; }
 
 .temperature {
   font-size: 80px;
