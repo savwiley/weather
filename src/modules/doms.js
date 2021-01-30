@@ -7,11 +7,17 @@ const regeneratorRuntime = require("regenerator-runtime");
 
 // DOMS
 const body = document.querySelector("body");
+const topLeft = document.createElement("div");
+  topLeft.setAttribute("class", "topLeft");
+  body.appendChild(topLeft);
+const topRight = document.createElement("div");
+  topRight.setAttribute("class", "topRight");
+  body.appendChild(topRight);
 
 //location display
 const location = document.createElement("div");
   location.setAttribute("class", "location");
-  body.appendChild(location);
+  topLeft.appendChild(location);
 
 const city = document.createElement("div");
   city.setAttribute("id", "city");
@@ -19,20 +25,30 @@ const city = document.createElement("div");
 const country = document.createElement("img");
   country.setAttribute("id", "country");
   location.appendChild(country);
-const tmz = document.createElement("div");
-  tmz.setAttribute("id", "tmz");
-  location.appendChild(tmz);
 
 //temp display
 const tempDisplay = document.createElement("div");
   tempDisplay.setAttribute('class', 'temperature');
-  body.appendChild(tempDisplay);
+  topLeft.appendChild(tempDisplay);
 const feelsLike = document.createElement("div");
-  body.appendChild(feelsLike);
+  feelsLike.setAttribute('id', 'feelsLike');
+  topLeft.appendChild(feelsLike);
 const tMin = document.createElement("div");
-  body.appendChild(tMin);
+  tMin.setAttribute('id', 'tMin');
+  topLeft.appendChild(tMin);
 const tMax = document.createElement("div");
-  body.appendChild(tMax);
+  tMax.setAttribute('id', 'tMax');
+  topLeft.appendChild(tMax);
+
+//weather display
+const icon = document.createElement("img");
+  topRight.appendChild(icon);
+const wMain = document.createElement("div");
+  wMain.setAttribute("id", "wMain");
+  topRight.appendChild(wMain);
+const wDesc = document.createElement("div");
+  wDesc.setAttribute("id", "wDesc");
+  topRight.appendChild(wDesc);
 
 
 
@@ -41,18 +57,29 @@ const tMax = document.createElement("div");
 async function run(p, t) {
   try {
     const weatherData = await weatherAPI(p, t);
+    let unit;
+    if (t == "imperial") {
+      unit = "F";
+    } else {
+      unit = "C";
+    };
 
     //location
-    city.textContent = weatherData.name;
+    city.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
     country.src = `https://www.countryflags.io/${weatherData.sys.country}/shiny/64.png`;
-    tmz.textContent = weatherData.timezone;
+    country.title = weatherData.sys.country;
 
     //temp
-    tempDisplay.textContent = `${weatherData.main.temp}°`;
-    feelsLike.textContent = `${weatherData.main.feels_like}°`;
-    tMin.textContent = `${weatherData.main.temp_min}°`;
-    tMax.textContent = `${weatherData.main.temp_max}°`;
-    
+    tempDisplay.textContent = `${weatherData.main.temp}°${unit}`;
+    feelsLike.textContent = `Feels Like ${weatherData.main.feels_like}°`;
+    tMin.textContent = `Min: ${weatherData.main.temp_min}°`;
+    tMax.textContent = `Max: ${weatherData.main.temp_max}°`;
+
+    //weather
+    icon.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`;
+    icon.title = weatherData.weather[0].main;
+    wMain.textContent = weatherData.weather[0].main;
+    wDesc.textContent = weatherData.weather[0].description;
 
   } catch(e) {
     console.log(e)
@@ -70,9 +97,9 @@ async function run(p, t) {
       + country: weaData.sys.country,
       sunrise: weaData.sys.sunrise,
       sunset: weaData.sys.sunset,
-      mainDesc: weaData.weather[0].main,
-      desc: weaData.weather[0].description,
-      icon: weaData.weather[0].icon,
+      + mainDesc: weaData.weather[0].main,
+      + desc: weaData.weather[0].description,
+      + icon: weaData.weather[0].icon,
       id: weaData.weather[0].id,
       windDir: weaData.wind.deg,
       windSp: weaData.wind.speed,
