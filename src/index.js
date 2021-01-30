@@ -9,8 +9,7 @@ const subBtn = document.querySelector(".fa-search");
 
 
 // temp unit (metric = C; imperial = F)
-// the variable may be unnecessary
-let tUnit;
+let tUnit = "imperial";
 const fBtn = document.querySelector("#fBtn");
 const cBtn = document.querySelector("#cBtn");
 
@@ -30,7 +29,8 @@ cBtn.addEventListener('click', () => {
 
 
 // Calls function on start
-run("London", "imperial");
+run("London", tUnit);
+place.value = "London";
 
 
 // Event to change location
