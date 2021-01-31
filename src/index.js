@@ -39,7 +39,7 @@ subBtn.addEventListener('click', () => {
 });
 
 
-// FETCH FUNCTION
+// FETCH CURRENT WEATHER FUNCTION
 export default async function weatherAPI(p, t) {
   try {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${p}&units=${t}&APPID=a649f8f0f6c898c4fe7ae2dfea5f0800`);
@@ -53,11 +53,15 @@ export default async function weatherAPI(p, t) {
 
 
 
-
-
 /*
 
 FAVICON doesn't want to work
+The maps are shit, don't worry about them
+Put in the forecast (7-day?)
+>>> https://openweathermap.org/api/one-call-api
+Add credit to github
+Key bind `enter` to search
+Consider adding a loading image/animation
 
 
 OpenWeather API
