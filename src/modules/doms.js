@@ -1,4 +1,4 @@
-import weatherAPI from "../index"
+import weatherAPI from "../index";
 
 // BABEL
 const regeneratorRuntime = require("regenerator-runtime");
@@ -50,6 +50,23 @@ const wDesc = document.createElement("div");
   wDesc.setAttribute("id", "wDesc");
   topRight.appendChild(wDesc);
 
+//details bar display
+const deets = document.createElement("div");
+  deets.setAttribute("class", "deets");
+  body.appendChild(deets);
+
+//wind/clouds display
+const wind = document.createElement("div");
+  deets.appendChild(wind);
+const cloudPerc = document.createElement("div");
+  deets.appendChild(cloudPerc);
+
+//humidity/pressure
+const humid = document.createElement("div");
+  deets.appendChild(humid);
+const pressure = document.createElement("div");
+  deets.appendChild(pressure);
+
 
 
 
@@ -57,12 +74,19 @@ const wDesc = document.createElement("div");
 async function run(p, t) {
   try {
     const weatherData = await weatherAPI(p, t);
+
     let unit;
     if (t == "imperial") {
       unit = "F";
     } else {
       unit = "C";
     };
+
+    //pieces of a func to find direction from degree angle via github
+    //https://gist.github.com/basarat/4670200
+    const val = Math.floor((weatherData.wind.deg / 22.5) + 0.5);
+    const arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    const direction = arr[(val % 16)];
 
     //location
     city.textContent = `${weatherData.name}, ${weatherData.sys.country}`;
@@ -81,33 +105,17 @@ async function run(p, t) {
     wMain.textContent = weatherData.weather[0].main;
     wDesc.textContent = weatherData.weather[0].description;
 
+    //wind, clouds, humidity, pressure
+    wind.textContent = `Wind Speed: ${weatherData.wind.speed}m/s ${direction}`;
+    cloudPerc.textContent = `Cloudiness: ${weatherData.clouds.all}%`;
+    humid.textContent = `Humidity: ${weatherData.main.humidity}%`;
+    pressure.textContent = `Pressure: ${weatherData.main.pressure} hPa`;
+
+
   } catch(e) {
     console.log(e)
   }
 }
-
-
-/*
-      + temp: weaData.main.temp, 
-      + feels: weaData.main.feels_like,
-      humid: weaData.main.humidity,
-      press: weaData.main.pressure,
-      + tMin: weaData.main.temp_min,
-      + tMax: weaData.main.temp_max,
-      + country: weaData.sys.country,
-      sunrise: weaData.sys.sunrise,
-      sunset: weaData.sys.sunset,
-      + mainDesc: weaData.weather[0].main,
-      + desc: weaData.weather[0].description,
-      + icon: weaData.weather[0].icon,
-      id: weaData.weather[0].id,
-      windDir: weaData.wind.deg,
-      windSp: weaData.wind.speed,
-      clouds: weaData.clouds.all,
-      visible: weaData.visibility,
-      + city: weaData.name,
-      + tmz: weaData.timezone
-*/
 
 
 
