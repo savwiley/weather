@@ -82,14 +82,12 @@ input[type="text"]:focus { outline: none; }
 .topLeft, .topRight { display: inline-block; }
 .topRight {
   width: 50%;
-  height: 40vh;
   float: right;
   text-align: center;
-  margin-top: -20px;
+  margin-top: -40px;
 }
 .topLeft {
   width: 50%;
-  height: 40vh;
   text-align: center;
 }
 
@@ -163,6 +161,7 @@ input[type="text"]:focus { outline: none; }
   display: flex;
   padding: 5px;
   color: var(--gray);
+  margin-top: 50px;
 }
 .deets div {
   width: 100%;
@@ -178,7 +177,7 @@ input[type="text"]:focus { outline: none; }
   background: var(--yellowO);
   width: 80vw;
   height: 230px;
-  margin: 50px auto;
+  margin: 100px auto 0;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
@@ -188,6 +187,7 @@ input[type="text"]:focus { outline: none; }
 .dailyForecast {
   background: var(--blueO);
   color: var(--gray); 
+  margin: 30px auto;
 }
 
 #hourly, #daily {
