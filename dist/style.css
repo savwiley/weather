@@ -23,6 +23,18 @@ body {
   padding: 10px;
 }
 
+.credit {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  font-size: 25px;
+}
+.credit a{ 
+  color: #c4c4c4;
+  transition: all 0.5s;
+}
+.credit a:hover{ color: #a7a7a7; }
+
 
 /* HEADER */
 
