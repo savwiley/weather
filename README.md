@@ -1,6 +1,6 @@
 # Weather APP: TOP JS Project
 
-This project was made almost entirely with Javascript. Information about the To-Do List Project can be found [here](https://theodinproject.com/lessons/weather-app).
+This project was made almost entirely with Javascript. Information about the Weather App Project can be found [here](https://theodinproject.com/lessons/weather-app).
 
 Preview the site [here](https://savwiley.github.io/weather/dist/)!
 
