@@ -17,6 +17,7 @@ fBtn.addEventListener('click', () => {
   cBtn.removeAttribute("class", "btnSelect");
   fBtn.setAttribute("class", "btnSelect");
   tUnit = "imperial";
+  delForecast()
   run(place.value, tUnit)
 })
 
@@ -24,23 +25,44 @@ cBtn.addEventListener('click', () => {
   fBtn.removeAttribute("class", "btnSelect");
   cBtn.setAttribute("class", "btnSelect");
   tUnit = "metric";
+  delForecast()
   run(place.value, tUnit)
 })
 
+// removes hourly & daily
+function delForecast() {
+  const hours = document.querySelectorAll("#hourly");
+    hours.forEach((e) => {
+      e.remove();
+    });
+  const dailies = document.querySelectorAll("#daily");
+    dailies.forEach((e) => {
+      e.remove();
+    })
+}
+
 
 // Calls function on start
-run("London", tUnit);
-place.value = "London";
+run("New Orleans", tUnit);
+place.value = "New Orleans";
 
 
 // Event to change location
-subBtn.addEventListener('click', () => {
+subBtn.addEventListener('click', runEvent);
+place.addEventListener('keydown', (e) => {
+  if (e.keyCode === 13) {
+    runEvent();
+  }
+})
+
+function runEvent() {
   run(place.value, tUnit)
-});
+}
 
 
 // FETCH CURRENT WEATHER FUNCTION
 export default async function weatherAPI(p, t) {
+  delForecast();
   try {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${p}&units=${t}&APPID=a649f8f0f6c898c4fe7ae2dfea5f0800`);
     const weaData = await response.json();
@@ -55,13 +77,14 @@ export default async function weatherAPI(p, t) {
 
 /*
 
-FAVICON doesn't want to work
 The maps are shit, don't worry about them
 Put in the forecast (7-day?)
 >>> https://openweathermap.org/api/one-call-api
 Add credit to github
-Key bind `enter` to search
+Make a catch that users can see (not an alert, c'mon)
 Consider adding a loading image/animation
+Consider adding a coordinates thing to guestimate random places
+Look into auto-finished search results
 
 
 OpenWeather API
