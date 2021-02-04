@@ -4,7 +4,6 @@ import weatherAPI from "../index";
 const regeneratorRuntime = require("regenerator-runtime");
 
 
-
 // DOMS
 const body = document.querySelector("body");
 const topLeft = document.createElement("div");
@@ -67,6 +66,16 @@ const humid = document.createElement("div");
 const pressure = document.createElement("div");
   deets.appendChild(pressure);
 
+//hourly
+const hourlyForecast = document.createElement("div");
+  hourlyForecast.setAttribute("class", "hourlyForecast");
+  body.appendChild(hourlyForecast);
+
+//daily
+const dailyForecast = document.createElement("div");
+  dailyForecast.setAttribute("class", "dailyForecast");
+  body.appendChild(dailyForecast);
+
 
 
 
@@ -74,6 +83,8 @@ const pressure = document.createElement("div");
 async function run(p, t) {
   try {
     const weatherData = await weatherAPI(p, t);
+    const forecast = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&exclude=current,minutely&units=${t}&appid=a649f8f0f6c898c4fe7ae2dfea5f0800`);
+    const foreData = await forecast.json();
 
     let unit;
     if (t == "imperial") {
@@ -106,10 +117,72 @@ async function run(p, t) {
     wDesc.textContent = weatherData.weather[0].description;
 
     //wind, clouds, humidity, pressure
-    wind.textContent = `Wind Speed: ${weatherData.wind.speed}m/s ${direction}`;
+    wind.textContent = `Wind Speed: ${direction} ${weatherData.wind.speed}`;
     cloudPerc.textContent = `Cloudiness: ${weatherData.clouds.all}%`;
     humid.textContent = `Humidity: ${weatherData.main.humidity}%`;
     pressure.textContent = `Pressure: ${weatherData.main.pressure} hPa`;
+
+
+    //hourly
+    foreData.hourly.forEach((e) => {
+      //index
+      let i = 0;
+
+      const hourly = document.createElement("div");
+        hourly.setAttribute("id", "hourly");
+
+        //time
+        hourly.textContent = new Date(e.dt * 1000).toLocaleString("en-US", {hour: "numeric"});
+
+        //icon
+        const hIcon = document.createElement("img");
+          hIcon.src = `http://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
+          hourly.appendChild(hIcon);
+
+        //description
+        const hDesc = document.createElement("span");
+          hDesc.textContent = e.weather[i].description;
+          hourly.appendChild(hDesc);
+
+        //temp
+        const hTemp = document.createElement("div");
+          hTemp.textContent = `${e.temp}°${unit}`;
+          hourly.appendChild(hTemp);
+
+        i++;
+        hourlyForecast.appendChild(hourly);
+    })
+
+
+    //daily
+    foreData.daily.forEach((e) => {
+      //index
+      let i = 0;
+
+      const daily = document.createElement("div");
+      daily.setAttribute("id", "daily");
+
+        //time
+        daily.textContent = new Date(e.dt * 1000).toLocaleString("en-US", {weekday: "long"});
+
+        //icon
+        const dIcon = document.createElement("img");
+          dIcon.src = `http://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
+          daily.appendChild(dIcon);
+
+        //description
+        const dDesc = document.createElement("span");
+          dDesc.textContent = e.weather[i].description;
+          daily.appendChild(dDesc);
+
+        //temp
+        const dTemp = document.createElement("div");
+          dTemp.textContent = `${e.temp.day}°${unit}`;
+          daily.appendChild(dTemp);
+
+        i++;
+        dailyForecast.appendChild(daily);
+    })
 
 
   } catch(e) {
@@ -118,7 +191,42 @@ async function run(p, t) {
 }
 
 
-
-
-
 export default run;
+
+
+
+
+/*
+FORECAST OBJECT OH MY GOD
+
+DAILY
+- foreData.daily[i].temp.day
+- foreData.daily[i].temp.night
+- foreData.daily[i].feels_like.day
+- foreData.daily[i].feels_like.night
+- foreData.daily[i].rain (?)
+- foreData.daily[i].weather.icon
+- foreData.daily[i].weather.main
+- foreData.daily[i].weather.description
+- foreData.daily[i].wind_deg
+- foreData.daily[i].wind_speed
+
+HOURLY
+- foreData.hourly[i].feels_like
+- foreData.hourly[i].temp
+- foreData.hourly[i].weather.icon
+- foreData.hourly[i].weather.main
+- foreData.hourly[i].weather.description
+- foreData.hourly[i].wind_deg
+- foreData.hourly[i].wind_speed
+
+ALERT
+- foreData.alerts.event
+- foreData.alerts.description
+- foreData.alerts.start
+- foreData.alerts.end
+- foreData.alerts.sender_name
+
+OTHER
+-foreData.timezone (gives an actual name)
+*/
