@@ -165,16 +165,17 @@ input[type="text"]:focus { outline: none; }
   flex-wrap: nowrap;
   background: var(--yellowO);
   width: 80vw;
-  height: 35vh;
+  height: 230px;
   margin: 50px auto;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
   border-radius: 20px 20px 0 0;
+  font-size: 1.3vw;
 }
 .dailyForecast {
   background: var(--blueO);
-  color: var(--gray);
+  color: var(--gray); 
 }
 
 #hourly, #daily {
