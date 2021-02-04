@@ -111,7 +111,7 @@ async function run(p, t) {
     tMax.textContent = `Max: ${weatherData.main.temp_max}°`;
 
     //weather
-    icon.src = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`;
+    icon.src = `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`;
     icon.title = weatherData.weather[0].main;
     wMain.textContent = weatherData.weather[0].main;
     wDesc.textContent = weatherData.weather[0].description;
@@ -136,7 +136,7 @@ async function run(p, t) {
 
         //icon
         const hIcon = document.createElement("img");
-          hIcon.src = `http://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
+          hIcon.src = `https://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
           hourly.appendChild(hIcon);
 
         //description
@@ -167,7 +167,7 @@ async function run(p, t) {
 
         //icon
         const dIcon = document.createElement("img");
-          dIcon.src = `http://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
+          dIcon.src = `https://openweathermap.org/img/wn/${e.weather[i].icon}@2x.png`
           daily.appendChild(dIcon);
 
         //description

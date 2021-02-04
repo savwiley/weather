@@ -64,7 +64,7 @@ function runEvent() {
 export default async function weatherAPI(p, t) {
   delForecast();
   try {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${p}&units=${t}&APPID=a649f8f0f6c898c4fe7ae2dfea5f0800`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${p}&units=${t}&APPID=a649f8f0f6c898c4fe7ae2dfea5f0800`);
     const weaData = await response.json();
     return weaData;
   } catch(error) {
