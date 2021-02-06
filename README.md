@@ -7,8 +7,6 @@ Preview the site [here](https://savwiley.github.io/weather/dist/)!
 ## Known Problems/To-Dos
 
 - Make app completely mobile friendly
-- Create loading animation
-- Create an error message
 - Add emergency alerts
 - Consider adding lat/lon search feature
 - Research auto-fill search
