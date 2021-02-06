@@ -1,13 +1,12 @@
 :root {
   --black: #000;
-  --blue: #14213d;
-  --yellow: #fca311;
+  --darkGray: #a7a7a7;
+  --medGray: #c4c4c4;
   --gray: #e5e5e5;
   --white: #fff;
 
+  --blackO: rgba(0,0,0,0.3);
   --grayO: rgb(229, 229, 229, 0.5);
-  --blueO: rgb(20, 33, 61, 0.8);
-  --yellowO: rgb(252, 163, 17, 0.5);
 
   --Hfont: 'Audiowide', Courier New, monospace;
   --font: 'Montserrat', sans-serif;
@@ -28,10 +27,10 @@ body { padding: 10px; }
   font-size: 25px;
 }
 .credit a{ 
-  color: #c4c4c4;
+  color: var(--medGray);
   transition: all 0.5s;
 }
-.credit a:hover{ color: #a7a7a7; }
+.credit a:hover{ color: var(--darkGray); }
 
 
 /* LOADING */
@@ -42,7 +41,7 @@ body { padding: 10px; }
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(0,0,0,0.3);
+  background: var(--blackO);
 }
 .loading img {
   display: block;
@@ -127,13 +126,10 @@ input[type="text"]:focus { outline: none; }
 .tempUnits div:hover { background: var(--grayO); }
 #cBtn { margin-left: 10px; }
 .btnSelect { 
-  border: 2px inset var(--blue) !important;
-  background: var(--blueO) !important; 
-  color: var(--yellow) !important;
+  border: 2px inset var(--darkGray) !important;
+  background: var(--blackO) !important; 
 }
-.btnSelect:hover {
-  background: var(--blueO) !important;
-}
+.btnSelect:hover { background: var(--grayO) !important; }
 
 
 /* TOP LEFT */
@@ -229,7 +225,7 @@ input[type="text"]:focus { outline: none; }
   display: inline-block;
   height: 100%;
   width: 15%;
-  border-right: 1px solid rgba(0,0,0,0.3);
+  border-right: 1px solid var(--blackO);
   text-align: center;
   padding: 5px;
 }
@@ -237,7 +233,7 @@ input[type="text"]:focus { outline: none; }
 #hourly img, #daily img {
   display: block;
   margin: auto;
-  background: rgba(0,0,0,0.3);
+  background: var(--blackO);
   border-radius: 50px;
 }
 #hourly span, #daily span { text-transform: capitalize; }
