@@ -85,7 +85,7 @@ async function run(p, t) {
     const loading = document.createElement("div");
       loading.setAttribute("class", "loading");
     const loadingImg = document.createElement("img");
-      loadingImg.src = "https://i.stack.imgur.com/oQ0tF.gif";
+      loadingImg.src = "../images/loading.gif";
       loading.appendChild(loadingImg);
       body.appendChild(loading);
 
