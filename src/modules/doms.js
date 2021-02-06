@@ -82,6 +82,13 @@ const dailyForecast = document.createElement("div");
 // DISPLAY DATA
 async function run(p, t) {
   try {
+    const loading = document.createElement("div");
+      loading.setAttribute("class", "loading");
+    const loadingImg = document.createElement("img");
+      loadingImg.src = "https://i.stack.imgur.com/oQ0tF.gif";
+      loading.appendChild(loadingImg);
+      body.appendChild(loading);
+
     const weatherData = await weatherAPI(p, t);
     const forecast = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&exclude=current,minutely&units=${t}&appid=a649f8f0f6c898c4fe7ae2dfea5f0800`);
     const foreData = await forecast.json();
@@ -182,11 +189,14 @@ async function run(p, t) {
 
         i++;
         dailyForecast.appendChild(daily);
+
+        loading.remove();
     })
 
 
-  } catch(e) {
-    console.log(e)
+  } catch(error) {
+    alert("Please enter a major city.");
+    console.log(error);
   }
 }
 
