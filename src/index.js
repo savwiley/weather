@@ -68,7 +68,7 @@ export default async function weatherAPI(p, t) {
     const weaData = await response.json();
     return weaData;
   } catch(error) {
-    console.log(error)
+    console.log(error);
   };
 };
 
